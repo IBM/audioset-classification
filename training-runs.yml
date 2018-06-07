@@ -1,0 +1,38 @@
+model_definition:
+  framework:
+#framework name and version (supported list of frameworks available at 'bx ml list frameworks')
+   name: tensorflow #To change
+   version: '1.8.4'
+#name of the training-run
+  name: audioset-classifier #As you please
+#Author name and email
+  author:
+    name: IBM CODAIT
+    email: no-reply@us.ibm.com
+  description: Audioset embedding classifier
+  execution:
+#Command to execute
+    command: bash runme.sh #run your script here
+    compute_configuration:
+#Valid values for name - k80/k80x2/k80x4/p100/p100x2/v100/v100x2/small/medium/large
+      name: v100
+training_data_reference:
+#Source connection object credentials
+  name: training-data-reference_name
+  connection:
+    endpoint_url: s3-api.us-geo.objectstorage.softlayer.net
+    access_key_id: 8176c89ac1c44a6cb18f2d85fba382ac
+    secret_access_key: c571bb7da316d84b526ced2ad9984c92e470f867f178b36c
+  source:
+    bucket: training-audioset-classify
+  type: s3
+training_results_reference:
+#Target connection object credentials
+  name: training-results-reference_name
+  connection:
+    endpoint_url: s3-api.us-geo.objectstorage.softlayer.net
+    access_key_id: 8176c89ac1c44a6cb18f2d85fba382ac
+    secret_access_key: c571bb7da316d84b526ced2ad9984c92e470f867f178b36c
+  target:
+    bucket: results-audioset-classify
+  type: s3

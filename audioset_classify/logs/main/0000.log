@@ -1,0 +1,2 @@
+Mon, 04 Jun 2018 15:27:50 main.py[line:211] INFO /Users/karthik/bx_audioset_classify/audioset_classify/keras/main.py
+Mon, 04 Jun 2018 15:27:50 main.py[line:212] INFO Namespace(balance_type='balance_in_batch', data_dir='', filename='main', learning_rate=0.001, mini_data=False, mode='train', model_type='decision_level_multi_attention', workspace='')
