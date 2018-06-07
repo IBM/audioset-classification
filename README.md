@@ -1,4 +1,4 @@
-# Audio Classification using Keras and Jupyter Notebooks running on IBM Cloud
+# Audio Classification using Keras and Jupyter Notebooks
 
 In this developer code pattern, we first create a Deep Learning model to classify audio embeddings. We train the model on IBM Deep Learning as a Service (DLaaS) platform and then perform inference/evaluation on IBM Watson Studio. 
 
