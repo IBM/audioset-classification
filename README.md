@@ -145,11 +145,29 @@ OK
 Model-ID is 'training-GCtN_YRig'
 ```
 
-* Monitor the  training run
+### Monitor the  training run
 
 - To list the training runs - `bx ml list training-runs`
 - To monitor a specific training run - `bx ml show training-runs <training-id>`
 - To monitor the output (stdout) from the training run - `bx ml monitor training-runs <training-id>`
 	- This will print the first couple of lines, and may time out.
 
+Once the training is complete, you can access the model and weights from the cloud object storage. The weights can be downloaded from the UI. 
 
+The file we will be using for the next steps will be called `final_weights.h5`. It can be found on the object storage bucket `results-audioset-classify` under `<your_training_id>/models/main/balance_type=balance_in_batch/model_type=decision_level_multi_attention/final_weights.h5`. 
+
+The file can be downloaded via UI or via command line using the below command:
+
+```
+$ aws s3 cp s3://results-audioset-classify/<your_training_id>/models/main/balance_type=balance_in_batch/model_type=decision_level_multi_attention/final_weights.h5 final_weights.h5
+
+```
+
+## 4. Upload evaluation notebook on Watson Studio
+
+1. Create a new project `Audioset Classification` on Watson Studio.
+2. Navigate to `Assets -> Notebooks` and click on `New notebook`.
+3. On the next screen click on `From file` and upload the [audioclassify_inference.ipynb](audioclassify_inference.ipynb) file. 
+4. Before proceeding to run inference, upload `final_weights.h5` (file which we downloaded in the previous step) and `eval.h5` to the object storage linked to Watson Studio. This can be done by going to assets and clicking on the icon on the right to popup the data upload GUI as shown in the screenshot below.  
+
+## Run inference
