@@ -70,14 +70,25 @@ The steps can be broadly classified into the following topics:
 
 Note: If you want to perform inference with pre-trained weights, skip to step 4 directly. 
 
-## Clone the repository
+## 1. Clone the repository
 
-* Clone this repository and change into the new directory:
+Clone this repository and change into the new directory:
 
 ```
 $ git clone https://github.com/IBM/audioset-classification
 $ cd audioset-classification
 ```
+
+A few things to mention about the contents of the repository:
+
+* [audio_classify.zip](audioset_classify.zip): This is the core training code we will be running on IBM Cloud. 
+* [audioset_classify](audioset_classify/): The training code for reference. We will use the first .zip file to upload this code to the cloud.
+* [training-runs.yml](training-runs.yml) This file is required to perform the training on IBM cloud. It is used to setup training metdata and connection information.
+* [audioset_inference.ipynb]([audioset_inference.ipynb]) This is the notebook we will be using to perform inference after training. 
+
+## 2. Upload training data to the cloud
+
+
 
 
 
