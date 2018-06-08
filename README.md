@@ -14,19 +14,19 @@ When the reader has completed this Code Pattern, they will understand how to:
 ## Flow
 
 ## Included Components
-* IBM Cloud Object Storage: insert description here
-* IBM Deep Learning as a Service: insert description here
-* Watson Studio: insert description here 
-* Jupyter Notebooks: An open source web application that allows you to create and share documents that contain live code, equations, visualizations, and explanatory text.
-* Keras: The Python Deep Learning library.
-* Tensorflow: An open-source software library for Machine Intelligence.
+* [IBM Cloud Object Storage](https://www.ibm.com/cloud/): insert description here
+* [IBM Deep Learning as a Service](https://www.ibm.com/cloud/): insert description here
+* [Watson Studio](https://www.ibm.com/cloud/watson-studio): insert description here 
+* [Jupyter Notebooks](http://jupyter.org/): An open source web application that allows you to create and share documents that contain live code, equations, visualizations, and explanatory text.
+* [Keras](https://keras.io/): The Python Deep Learning library.
+* [Tensorflow](https://www.tensorflow.org/): An open-source software library for Machine Intelligence.
 
 ## Featured Technologies
 
-* Cloud: Accessing computer and information technology resources through the Internet.
-* Data Science: Systems and scientific methods to analyze structured and unstructured data in order to extract knowledge and insights.
-* Artificial Intelligence: Artificial intelligence can be applied to disparate solution spaces to deliver disruptive technologies.
-* Python: Python is a programming language that lets you work more quickly and integrate your systems more effectively.
+* [Cloud](https://www.ibm.com/developerworks/learn/cloud/): Accessing computer and information technology resources through the Internet.
+* [Data Science](https://medium.com/ibm-data-science-experience/): Systems and scientific methods to analyze structured and unstructured data in order to extract knowledge and insights.
+* [Artificial Intelligence](https://www.ibm.com/developerworks/learn/cognitive/index.html):Artificial intelligence can be applied to disparate solution spaces to deliver disruptive technologies.
+* [Python](https://www.python.org/): Python is a programming language that lets you work more quickly and integrate your systems more effectively.
 
 # Prerequisites
 
