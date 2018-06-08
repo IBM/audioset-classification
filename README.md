@@ -156,6 +156,9 @@ Once the training is complete, you can access the model and weights from the clo
 
 The file we will be using for the next steps will be called `final_weights.h5`. It can be found on the object storage bucket `results-audioset-classify` under `<your_training_id>/models/main/balance_type=balance_in_batch/model_type=decision_level_multi_attention/final_weights.h5`. 
 
+![](doc/source/images/1.png)
+> The above screenshot shows the final weights/model checkpoints saved during training. 
+
 The file can be downloaded via UI or via command line using the below command:
 
 ```
@@ -168,6 +171,45 @@ $ aws s3 cp s3://results-audioset-classify/<your_training_id>/models/main/balanc
 1. Create a new project `Audioset Classification` on Watson Studio.
 2. Navigate to `Assets -> Notebooks` and click on `New notebook`.
 3. On the next screen click on `From file` and upload the [audioclassify_inference.ipynb](audioclassify_inference.ipynb) file. 
-4. Before proceeding to run inference, upload `final_weights.h5` (file which we downloaded in the previous step) and `eval.h5` to the object storage linked to Watson Studio. This can be done by going to assets and clicking on the icon on the right to popup the data upload GUI as shown in the screenshot below.  
+4. Upload `final_weights.h5` (file which we downloaded in the previous step) and `eval.h5` to the object storage linked to Watson Studio. This can be done by navigating to to `assets->New data asset` or clicking on the icon on the right to popup the data upload GUI as shown in the screenshot below. 
+
+![](doc/source/images/2.png)
+
+5. Similarly, upload [audioset_classify/metadata/eval_segments.csv](audioset_classify/metadata/eval_segments.csv) and [audioset_classify/metadata/class_label_indices.csv](audioset_classify/metadata/class_label_indices.csv) files. These files contain metadata such as YouTube URLs, class labels and start/end times. 
 
 ## Run inference
+
+Now that all the data has been setup, you can open the uploaded Jupyter notebook and follow inline comments / directions. 
+The first section loads the data into memory where applicable. Each cell mentions any action to be performed prior to executing the cell if applicable. 
+Example: to load the credentials for the data, navigate to the `Files` section on the right and click on the required file and click on `Insert to code->Insert credentials`. This will insert a code snippet with required credentials/API keys.  
+
+![](doc/source/images/3.png)
+> Screenshot showing how to insert file credentials into the notebook.
+
+* Run all cells as-is unless stated otherwise on cell comments. 
+
+* We now demonstrate two cool applications at the end of this tutorial. 
+
+### Real Time Demo
+
+The Real Time Demo section takes in a random audio (given as a number which is referenced from the eval.h5 list) and performs real time inference on that embedding and outputs class labels and a YouTube embedding plays the corresponding video/audio snippet. You can try out different videos and see that the performance matches human level annotation. 
+For example setting `video_number = 350` the top 5 class predictions are as shown in the screenshot below and it matches the audio perfectly. 
+
+![](doc/source/images/4.png)
+
+
+### Reverse search Audio using keywords
+
+Now we perform inference on the entire eval set and generate top 5 class predictions for each evaluation example. We then use these to retrieve suggestions when queried for a particular keyword. A example of this is shown below where the keyword is 'Car' and we see that results are pretty accurate. 
+Feel free to replace the `search_query = 'Car'` with your own keyword. For a list of all support keywords, refer to [class_label_indices.csv](audioset_classify\metadata\class_label_indices.csv).
+
+![](doc/source/images/5.png)
+
+
+
+
+
+
+
+
+
