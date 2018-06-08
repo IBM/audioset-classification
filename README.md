@@ -30,8 +30,33 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 # Prerequisites
 
-1. Setup cloud object storage and aws command line tools.
-2. Create accounts on DLaaS and WML.
+1. Setup cloud object storage and AWS command line tools.
+2. Create accounts on IBM Cloud and Watson Studio.
+
+
+### Setup an IBM Cloud Object Storage (COS) account
+- Create an IBM Cloud Object Storage account if you don't have one (https://www.ibm.com/cloud/storage)
+- Create credentials for either reading and writing or just reading
+	- From the bluemix console page (https://console.bluemix.net/dashboard/apps/), choose `Cloud Object Storage`
+	- On the left side, click the `service credentials`
+	- Click on the `new credentials` button to create new credentials
+	- In the `Add New Credentials` popup, use this parameter `{"HMAC":true}` in the `Add Inline Configuration...`
+	- When you create the credentials, copy the `access_key_id` and `secret_access_key` values.
+	- Make a note of the endpoint url
+		- On the left side of the window, click on `Endpoint`
+		- Copy the relevant public or private endpoint. [I choose the us-geo private endpoint].
+- In addition setup your [AWS S3 command line](https://aws.amazon.com/cli/) which can be used to create buckets and/or add files to COS.
+   - Export `AWS_ACCESS_KEY_ID` with your COS `access_key_id` and `AWS_SECRET_ACCESS_KEY` with your COS `secret_access_key`
+
+### Setup IBM CLI & ML CLI
+
+- Install [IBM Cloud CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started)
+  - Login using `bx login` or `bx login --sso` if within IBM
+- Install [ML CLI Plugin](https://dataplatform.ibm.com/docs/content/analyze-data/ml_dlaas_environment.html)
+  - After install, check if there is any plugins that need update
+    - `bx plugin update`
+  - Make sure to setup the various environment variables correctly:
+    - `ML_INSTANCE`, `ML_USERNAME`, `ML_PASSWORD`, `ML_ENV`
 
 # Steps
 
@@ -43,13 +68,15 @@ The steps can be broadly classified into the following topics:
 4. Upload evaluation notebook to Watson Studio.
 5. Run evaluation on Watson Studio.
 
+Note: If you want to perform inference with pre-trained weights, skip to step 4 directly. 
+
 ## Clone the repository
 
 * Clone this repository and change into the new directory:
 
 ```
-git clone https://github.com/IBM/audioset-classification
-cd audioset-classification
+$ git clone https://github.com/IBM/audioset-classification
+$ cd audioset-classification
 ```
 
 
