@@ -2,9 +2,9 @@ model_definition:
   framework:
 #framework name and version (supported list of frameworks available at 'bx ml list frameworks')
    name: tensorflow #To change
-   version: '1.8.4'
+   version: '1.8'
 #name of the training-run
-  name: audioset-classifier #As you please
+  name: audioset-classifier 
 #Author name and email
   author:
     name: IBM CODAIT
@@ -15,8 +15,8 @@ model_definition:
     command: bash runme.sh #run your script here
     compute_configuration:
 #Valid values for name - k80/k80x2/k80x4/p100/p100x2/v100/v100x2/small/medium/large
-      name: v100
-training_data_reference:
+      name: k80
+training_data_reference:b
 #Source connection object credentials
   name: training-data-reference_name
   connection:
