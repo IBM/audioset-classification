@@ -92,7 +92,7 @@ A few things to mention about the contents of the repository:
 
 Alternatively the file can also be downloaded by running this command on the terminal. 
 ```
-$  curl -O http://max-assets.s3-api.us-geo.objectstorage.softlayer.net/bal_train.h5
+$ curl -O http://max-assets.s3-api.us-geo.objectstorage.softlayer.net/bal_train.h5
 
 $ curl -O http://max-assets.s3-api.us-geo.objectstorage.softlayer.net/unbal_train.h5
 
@@ -125,4 +125,31 @@ $ aws s3 cp bal_train.h5 s3://training-audioset-classify/
 $ aws s3 cp unbal_train.h5 s3://training-audioset-classify/
 $ aws s3 cp eval.h5 s3://training-audioset-classify/
 ```
+
+## 3. Setup and upload model to DLaaS 
+
+Now that we have our training data setup, we upload our model and submit a training job. 
+
+* Replace the `api_key_id` and `secret_api_key_id` fields in the [training-runs.yml](training-runs.yml) file with your credentials as mentioned in the pre-requisites step.
+
+* Run the below code on the terminal to start training
+```
+$ bx ml train audioset_classify.zip training-runs.yml
+```
+
+After the train is started, it should print the training-id that is going to be necessary for steps below
+
+```
+Starting to train ...
+OK
+Model-ID is 'training-GCtN_YRig'
+```
+
+* Monitor the  training run
+
+- To list the training runs - `bx ml list training-runs`
+- To monitor a specific training run - `bx ml show training-runs <training-id>`
+- To monitor the output (stdout) from the training run - `bx ml monitor training-runs <training-id>`
+	- This will print the first couple of lines, and may time out.
+
 
