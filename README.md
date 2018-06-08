@@ -201,7 +201,7 @@ For example setting `video_number = 350` the top 5 class predictions are as show
 ### Reverse search Audio using keywords
 
 Now we perform inference on the entire eval set and generate top 5 class predictions for each evaluation example. We then use these to retrieve suggestions when queried for a particular keyword. A example of this is shown below where the keyword is 'Car' and we see that results are pretty accurate. 
-Feel free to replace the `search_query = 'Car'` with your own keyword. For a list of all support keywords, refer to [class_label_indices.csv](audioset_classify/metadata/class_label_indices.csv).
+Feel free to replace the `search_query = 'Car'` with your own keyword. For a list of all support keywords, refer to [class_labels_indices.csv](audioset_classify/metadata/class_labels_indices.csv).
 
 ![](doc/source/images/5.png)
 
