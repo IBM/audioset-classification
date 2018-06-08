@@ -208,8 +208,26 @@ Feel free to replace the `search_query = 'Car'` with your own keyword. For a lis
 
 
 
+## References
+[1] Gemmeke, Jort F., et al. "Audio set: An ontology and human-labeled dataset for audio events." Acoustics, Speech and Signal Processing (ICASSP), 2017 IEEE International Conference on. IEEE, 2017.
+
+[2] Kong, Qiuqiang, et al. "Audio Set classification with attention model: A probabilistic perspective." arXiv preprint arXiv:1711.00927 (2017).
+
+[3] Yu, Changsong, et al. "Multi-level Attention Model for Weakly Supervised Audio Classification." arXiv preprint arXiv:1803.02353 (2018).
+
+## External links
+The core model for audio classification is based on the [implementation](https://github.com/qiuqiangkong/audioset_classification) and paper by  Qiuqiang Kong. 
+
+The original [implementation](https://github.com/ChangsongYu/Eusipco2018_Google_AudioSet) of [3] is created by Changsong Yu. 
 
 
+# Learn more
 
+* **Artificial Intelligence Code Patterns**: Enjoyed this Code Pattern? Check out our other [AI Code Patterns](https://developer.ibm.com/code/technologies/artificial-intelligence/).
+* **AI and Data Code Pattern Playlist**: Bookmark our [playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our Code Pattern videos
+* **With Watson**: Want to take your Watson app to the next level? Looking to utilize Watson Brand assets? [Join the With Watson program](https://www.ibm.com/watson/with-watson/) to leverage exclusive brand, marketing, and tech resources to amplify and accelerate your Watson embedded commercial solution.
 
+# License
+
+[Apache 2.0](LICENSE)
 
