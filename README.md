@@ -84,7 +84,7 @@ A few things to mention about the contents of the repository:
 * [audio_classify.zip](audioset_classify.zip): This is the core training code we will be running on IBM Cloud. 
 * [audioset_classify](audioset_classify/): The training code for reference. We will use the first .zip file to upload this code to the cloud.
 * [training-runs.yml](training-runs.yml) This file is required to perform the training on IBM cloud. It is used to setup training metdata and connection information.
-* [audioclassify_inference.ipynb]([audioclassify_inference.ipynb]) This is the notebook we will be using to perform inference after training. 
+* [audioclassify_inference.ipynb](audioclassify_inference.ipynb) This is the notebook we will be using to perform inference after training. 
 
 ## 2. Upload training data to the cloud
 
