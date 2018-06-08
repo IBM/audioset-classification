@@ -88,8 +88,41 @@ A few things to mention about the contents of the repository:
 
 ## 2. Upload training data to the cloud
 
+* Download the data from [here](http://max-assets.s3-api.us-geo.objectstorage.softlayer.net/mnist_sequence1_sample_5distortions5x5.npz).
 
+Alternatively the file can also be downloaded by running this command on the terminal. 
+```
+$  curl -O http://max-assets.s3-api.us-geo.objectstorage.softlayer.net/bal_train.h5
 
+$ curl -O http://max-assets.s3-api.us-geo.objectstorage.softlayer.net/unbal_train.h5
 
+$ curl -O http://max-assets.s3-api.us-geo.objectstorage.softlayer.net/eval.h5
 
+```
+
+* Create buckets on the object storage. This can be done either through the UI or through the command line as shown below. 
+
+We will create one bucket to put the training data and one bucket where the code will save the results/models at the end of training. 
+
+```
+$ aws s3 mb s3://training-audioset-classify
+
+$ aws s3 mb s3://results-audioset-classify
+
+```
+Note: Developers within IBM will need to add an endpoint URL to all `aws s3` comamnds. The above commands will thus look like this : 
+
+```
+$ aws --endpoint-url=http://s3-api.us-geo.objectstorage.softlayer.net s3 mb s3://training-audioset-classify
+
+$ aws --endpoint-url=http://s3-api.us-geo.objectstorage.softlayer.net s3mb s3://results-audioset-classify
+
+```
+
+Now we can move the files to the object storage.
+```
+$ aws s3 cp bal_train.h5 s3://training-audioset-classify/
+$ aws s3 cp unbal_train.h5 s3://training-audioset-classify/
+$ aws s3 cp eval.h5 s3://training-audioset-classify/
+```
 
