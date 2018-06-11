@@ -21,7 +21,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 4. Upload and run the attaheched Jupyter notebook on Watson Studio to perform inference. 
 
 ## Included Components
-* [IBM Cloud Object Storage](https://www.ibm.com/cloud/): insert description here
+* [IBM Cloud Object Storage](https://www.ibm.com/cloud/): <insert official description here>
 * [IBM Deep Learning as a Service](https://www.ibm.com/cloud/): insert description here
 * [Watson Studio](https://www.ibm.com/cloud/watson-studio): insert description here 
 * [Jupyter Notebooks](http://jupyter.org/): An open source web application that allows you to create and share documents that contain live code, equations, visualizations, and explanatory text.
