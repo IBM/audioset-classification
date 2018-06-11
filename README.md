@@ -1,4 +1,4 @@
-# Train and Evaluate an Audio Classifier using Keras and Jupyter Notebooks
+# Train and Evaluate an Audio Classifier using Keras and Jupyter Notebook
 
 This developer code pattern will guide you through training a Deep Learning model to classify audio embeddings on IBM Deep Learning as a Service (DLaaS) platform and performing inference/evaluation on IBM Watson Studio. 
 
