@@ -16,7 +16,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 ## Flow
 1. Upload training files to Object Storage.
-2. Train on IBM Cloud.
+2. Train on Watson Machine Learning.
 3. Transfer trained model weights to new bucket on IBM Cloud and link it to IBM Watson Studio.
 4. Upload and run the attaheched Jupyter notebook on Watson Studio to perform inference. 
 
