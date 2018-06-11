@@ -11,7 +11,14 @@ When the reader has completed this Code Pattern, they will understand how to:
 * Integrate the object storage buckets into IBM Watson Studio.
 * Perform inference on an evaluation dataset using Jupyter Notebooks over IBM Watson Studio.
 
+![](doc/source/images/flow.png)
+
+
 ## Flow
+1. Upload training files to Object Storage.
+2. Train on IBM Cloud.
+3. Transfer trained model weights to new bucket on IBM Cloud and link it to IBM Watson Studio.
+4. Run Jupyter notebook on Watson Studio to perform inference. 
 
 ## Included Components
 * [IBM Cloud Object Storage](https://www.ibm.com/cloud/): insert description here
