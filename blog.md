@@ -8,7 +8,7 @@ We approach the problem of audio event classification in this code pattern. Give
 
 Is it a bird? Or is it a plane? 
 Okay, that sounds really easy from an audio classification perspective..right? Well, not really. Computers do not percieve audio the same way that we humans do. Just like they "see" one pixel at a time, they "hear" one bit at a time. So what seems trivial to us is actually not so straightforward after all. 
-In this code pattern, we convert raw audio into a series of numbers which effectively captures the essence of the signal - called an embedding - and how we can use such embeddings to effectively classify different kinds of audio. 
+In this code pattern, we convert raw audio into a series of numbers which effectively captures the essence of the signal - called an embedding - and show how we can use such embeddings to effectively classify different kinds of audio. 
 Additionally, while there are a lot of open source resources addressing problems from Computer Vision, audio understanding while not a new topic, is yet to reach mainstream developers. We hope this code pattern helps you get started in this area.
 
 ## Use cases?
