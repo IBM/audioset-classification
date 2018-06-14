@@ -2,7 +2,8 @@
 
 # What?
 
-We approach the problem of audio event classification in this code pattern. Given a short clip (~10 seconds) of raw audio, can we build a classifier that predicts what the sound was? If so, how? What all classes should be included in such a classifier? 
+In this code pattern, we address the problem of audio event classification. More specifically, given a short audio clip (~10 seconds), can a program classify the sound into classes - like speech, music, car, fireworks etc?  If so, how might one go about building a classifer like that? Where will such a classifier be useful?
+We address these very questions and guide you through making your own audio classifier in this code pattern..
 
 # Why?
 
