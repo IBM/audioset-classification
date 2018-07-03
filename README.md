@@ -95,17 +95,7 @@ A few things to mention about the contents of the repository:
 
 ## 2. Upload training data to the cloud
 
-* Download the data from [here](http://max-assets.s3-api.us-geo.objectstorage.softlayer.net/mnist_sequence1_sample_5distortions5x5.npz).
-
-Alternatively the file can also be downloaded by running this command on the terminal. 
-```
-$ curl -O http://max-assets.s3-api.us-geo.objectstorage.softlayer.net/bal_train.h5
-
-$ curl -O http://max-assets.s3-api.us-geo.objectstorage.softlayer.net/unbal_train.h5
-
-$ curl -O http://max-assets.s3-api.us-geo.objectstorage.softlayer.net/eval.h5
-
-```
+* Download the data from [here](https://github.com/qiuqiangkong/audioset_classification) under the section `download dataset`.
 
 * Create buckets on the object storage. This can be done either through the UI or through the command line as shown below. 
 
