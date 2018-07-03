@@ -12,17 +12,17 @@ model_definition:
   description: Audioset embedding classifier
   execution:
 #Command to execute
-    command: bash runme.sh 
+    command: bash runme.sh
     compute_configuration:
 #Valid values for name - k80/k80x2/k80x4/p100/p100x2/v100/v100x2/small/medium/large
       name: k80
-training_data_reference:b
+training_data_reference:
 #Source connection object credentials
   name: training-data-reference_name
   connection:
     endpoint_url: s3-api.us-geo.objectstorage.softlayer.net
-    access_key_id: #Insert your access key id here.
-    secret_access_key: #Insert your secret access key id here.
+    access_key_id: '' #Insert your access key id here.
+    secret_access_key: '' #Insert your secret access key id here.
   source:
     bucket: training-audioset-classify
   type: s3
@@ -31,8 +31,8 @@ training_results_reference:
   name: training-results-reference_name
   connection:
     endpoint_url: s3-api.us-geo.objectstorage.softlayer.net
-    access_key_id: #Insert your access key id here.
-    secret_access_key: #Insert your secret access key id here.
+    access_key_id: '' #Insert your access key id here.
+    secret_access_key: '' #Insert your secret access key id here.
   target:
     bucket: results-audioset-classify
   type: s3
