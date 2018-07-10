@@ -1,3 +1,7 @@
 sample_ffdl.yml
 convert_to_ffdl.py
 ffdl_runs.yml
+.DS_Store
+audioset_classify/.DS_Store
+.ipynb_checkpoints/audioclassify_inference-checkpoint.ipynb
+audioset_classify/.DS_Store
