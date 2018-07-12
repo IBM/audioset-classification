@@ -33,7 +33,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 * [Cloud](https://www.ibm.com/developerworks/learn/cloud/): Accessing computer and information technology resources through the Internet.
 * [Data Science](https://medium.com/ibm-data-science-experience/): Systems and scientific methods to analyze structured and unstructured data in order to extract knowledge and insights.
-* [Artificial Intelligence](https://www.ibm.com/developerworks/learn/cognitive/index.html):Artificial intelligence can be applied to disparate solution spaces to deliver disruptive technologies.
+* [Artificial Intelligence](https://www.ibm.com/developerworks/learn/cognitive/index.html): Artificial intelligence can be applied to disparate solution spaces to deliver disruptive technologies.
 * [Python](https://www.python.org/): Python is a programming language that lets you work more quickly and integrate your systems more effectively.
 
 # Prerequisites
