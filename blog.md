@@ -17,7 +17,7 @@ Additionally, while there are a lot of open source resources addressing problems
 Now that we know the exact problem we're solving, we can think of a few places this might come in handy. 
 1. Let's say you or your enterprise have a huge collection of songs/music which are unlabelled ie. no info on genre/instrument/style etc. A classifier trained on existing music genres can do a great job in organizing such files and incorporating into recommender systems. 
 2. A safety application capable of detecting gunshots/break-ins/crashes can be built and improve the response time of emergency services.
-3. Existing digital assistants like Google Home or Amazon Alexa have great speech recoginition abilites. Using a well trained classifier, they can be made smarter with enhanced capabilites transcending speech / conversation. 
+3. Existing digital assistants like Google Home or Amazon Alexa have great speech recognition abilites. Using a well trained classifier, they can be made smarter with enhanced capabilities transcending speech / conversation. 
 
 # How?
 
