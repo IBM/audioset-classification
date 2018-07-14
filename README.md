@@ -1,4 +1,4 @@
-# Train and Evaluate an Audio Embedding Classifier
+# Train and evaluate an audio embedding classifier
 
 This developer code pattern will guide you through training a Deep Learning model to classify audio embeddings on IBM's Deep Learning as a Service (DLaaS) platform  - Watson Machine Learning - and performing inference/evaluation on IBM Watson Studio. 
 
@@ -14,14 +14,15 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 ![](doc/source/images/flow.png)
 
-
 ## Flow
+
 1. Upload training files to Object Storage.
 2. Train on Watson Machine Learning.
 3. Transfer trained model weights to new bucket on IBM Cloud and link it to IBM Watson Studio.
 4. Upload and run the attached Jupyter notebook on Watson Studio to perform inference. 
 
 ## Included Components
+
 * [IBM Cloud Object Storage](https://www.ibm.com/cloud/):  A highly scalable cloud storage service, designed for high durability, resiliency and security.
 * [IBM Cloud Watson Machine Learning](https://www.ibm.com/cloud/machine-learning/pricing): Create, train, and deploy self-learning models. 
 * [Watson Studio](https://www.ibm.com/cloud/watson-studio): Build, train, deploy and manage AI models, and prepare and analyze data, in a single, integrated environment.
@@ -41,30 +42,30 @@ When the reader has completed this Code Pattern, they will understand how to:
 1. Setup cloud object storage and AWS command line tools.
 2. Create accounts on IBM Cloud and Watson Studio.
 
-
 ### Setup an IBM Cloud Object Storage (COS) account
-- Create an IBM Cloud Object Storage account if you don't have one (https://www.ibm.com/cloud/storage)
-- Create credentials for either reading and writing or just reading
-	- From the bluemix console page (https://console.bluemix.net/dashboard/apps/), choose `Cloud Object Storage`
-	- On the left side, click the `service credentials`
-	- Click on the `new credentials` button to create new credentials
-	- In the `Add New Credentials` popup, use this parameter `{"HMAC":true}` in the `Add Inline Configuration...`
-	- When you create the credentials, copy the `access_key_id` and `secret_access_key` values.
-	- Make a note of the endpoint url
-		- On the left side of the window, click on `Endpoint`
-		- Copy the relevant public or private endpoint. [I choose the us-geo private endpoint].
-- In addition setup your [AWS S3 command line](https://aws.amazon.com/cli/) which can be used to create buckets and/or add files to COS.
-   - Export `AWS_ACCESS_KEY_ID` with your COS `access_key_id` and `AWS_SECRET_ACCESS_KEY` with your COS `secret_access_key`
+
+* Create an IBM Cloud Object Storage account if you don't have one (https://www.ibm.com/cloud/storage)
+* Create credentials for either reading and writing or just reading
+	* From the bluemix console page (https://console.bluemix.net/dashboard/apps/), choose `Cloud Object Storage`
+	* On the left side, click the `service credentials`
+	* Click on the `new credentials` button to create new credentials
+	* In the `Add New Credentials` popup, use this parameter `{"HMAC":true}` in the `Add Inline Configuration...`
+	* When you create the credentials, copy the `access_key_id` and `secret_access_key` values.
+	* Make a note of the endpoint url
+		* On the left side of the window, click on `Endpoint`
+		* Copy the relevant public or private endpoint. [I choose the us-geo private endpoint].
+* In addition setup your [AWS S3 command line](https://aws.amazon.com/cli/) which can be used to create buckets and/or add files to COS.
+   * Export `AWS_ACCESS_KEY_ID` with your COS `access_key_id` and `AWS_SECRET_ACCESS_KEY` with your COS `secret_access_key`
 
 ### Setup IBM CLI & ML CLI
 
-- Install [IBM Cloud CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started)
-  - Login using `bx login` or `bx login --sso` if within IBM
-- Install [ML CLI Plugin](https://dataplatform.ibm.com/docs/content/analyze-data/ml_dlaas_environment.html)
-  - After install, check if there is any plugins that need update
-    - `bx plugin update`
-  - Make sure to setup the various environment variables correctly:
-    - `ML_INSTANCE`, `ML_USERNAME`, `ML_PASSWORD`, `ML_ENV`
+* Install [IBM Cloud CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started)
+  * Login using `bx login` or `bx login --sso` if within IBM
+* Install [ML CLI Plugin](https://dataplatform.ibm.com/docs/content/analyze-data/ml_dlaas_environment.html)
+  * After install, check if there is any plugins that need update
+    * `bx plugin update`
+  * Make sure to setup the various environment variables correctly:
+    * `ML_INSTANCE`, `ML_USERNAME`, `ML_PASSWORD`, `ML_ENV`
 
 # Steps
 
@@ -76,7 +77,7 @@ The steps can be broadly classified into the following topics:
 4. Upload evaluation notebook to Watson Studio.
 5. Run evaluation on Watson Studio.
 
-Note: If you want to perform inference with pre-trained weights, skip to step 4 directly. 
+> Note: If you want to perform inference with pre-trained weights, skip to step 4 directly. 
 
 ## 1. Clone the repository
 
@@ -104,20 +105,18 @@ We will create one bucket to put the training data and one bucket where the code
 
 ```
 $ aws s3 mb s3://training-audioset-classify
-
 $ aws s3 mb s3://results-audioset-classify
-
 ```
-Note: Developers within IBM will need to add an endpoint URL to all `aws s3` comamnds. The above commands will thus look like this : 
+
+Developers within IBM will need to add an endpoint URL to all `aws s3` comamnds. The above commands will thus look like this: 
 
 ```
 $ aws --endpoint-url=http://s3-api.us-geo.objectstorage.softlayer.net s3 mb s3://training-audioset-classify
-
 $ aws --endpoint-url=http://s3-api.us-geo.objectstorage.softlayer.net s3mb s3://results-audioset-classify
-
 ```
 
-Now we can move the files to the object storage.
+Now we can move the files to the object storage:
+
 ```
 $ aws s3 cp bal_train.h5 s3://training-audioset-classify/
 $ aws s3 cp unbal_train.h5 s3://training-audioset-classify/
@@ -130,7 +129,8 @@ Now that we have our training data setup, we upload our model and submit a train
 
 * Replace the `api_key_id` and `secret_api_key_id` fields in the [training-runs.yml](training-runs.yml) file with your credentials as mentioned in the pre-requisites step.
 
-* Run the below code on the terminal to start training
+* Run the below code on the terminal to start training:
+
 ```
 $ bx ml train audioset_classify.zip training-runs.yml
 ```
@@ -145,23 +145,23 @@ Model-ID is 'training-GCtN_YRig'
 
 ### Monitor the  training run
 
-- To list the training runs - `bx ml list training-runs`
-- To monitor a specific training run - `bx ml show training-runs <training-id>`
-- To monitor the output (stdout) from the training run - `bx ml monitor training-runs <training-id>`
-	- This will print the first couple of lines, and may time out.
+* To list the training runs - `bx ml list training-runs`
+* To monitor a specific training run - `bx ml show training-runs <training-id>`
+* To monitor the output (stdout) from the training run - `bx ml monitor training-runs <training-id>`
+	* This will print the first couple of lines, and may time out.
 
 Once the training is complete, you can access the model and weights from the cloud object storage. The weights can be downloaded from the UI. 
 
 The file we will be using for the next steps will be called `final_weights.h5`. It can be found on the object storage bucket `results-audioset-classify` under `<your_training_id>/models/main/balance_type=balance_in_batch/model_type=decision_level_multi_attention/final_weights.h5`. 
 
 ![](doc/source/images/1.png)
+
 > The above screenshot shows the final weights/model checkpoints saved during training. 
 
 The file can be downloaded via UI or via command line using the below command:
 
 ```
 $ aws s3 cp s3://results-audioset-classify/<your_training_id>/models/main/balance_type=balance_in_batch/model_type=decision_level_multi_attention/final_weights.h5 final_weights.h5
-
 ```
 
 ## 4. Upload evaluation notebook on Watson Studio
@@ -182,6 +182,7 @@ The first section loads the data into memory where applicable. Each cell mention
 Example: to load the credentials for the data, navigate to the `Files` section on the right and click on the required file and click on `Insert to code->Insert credentials`. This will insert a code snippet with required credentials/API keys.  
 
 ![](doc/source/images/3.png)
+
 > Screenshot showing how to insert file credentials into the notebook.
 
 * Run all cells as-is unless stated otherwise on cell comments. 
@@ -195,7 +196,6 @@ For example setting `video_number = 350` the top 5 class predictions are as show
 
 ![](doc/source/images/4.png)
 
-
 ### Reverse search Audio using keywords
 
 Now we perform inference on the entire eval set and generate top 5 class predictions for each evaluation example. We then use these to retrieve suggestions when queried for a particular keyword. A example of this is shown below where the keyword is 'Car' and we see that results are pretty accurate. 
@@ -203,21 +203,16 @@ Feel free to replace the `search_query = 'Car'` with your own keyword. For a lis
 
 ![](doc/source/images/5.png)
 
-
-
-
 ## References
-[1] Gemmeke, Jort F., et al. "Audio set: An ontology and human-labeled dataset for audio events." Acoustics, Speech and Signal Processing (ICASSP), 2017 IEEE International Conference on. IEEE, 2017.
 
-[2] Kong, Qiuqiang, et al. "Audio Set classification with attention model: A probabilistic perspective." arXiv preprint arXiv:1711.00927 (2017).
-
-[3] Yu, Changsong, et al. "Multi-level Attention Model for Weakly Supervised Audio Classification." arXiv preprint arXiv:1803.02353 (2018).
+* [1] Gemmeke, Jort F., et al. "Audio set: An ontology and human-labeled dataset for audio events." Acoustics, Speech and Signal Processing (ICASSP), 2017 IEEE International Conference on. IEEE, 2017.
+* [2] Kong, Qiuqiang, et al. "Audio Set classification with attention model: A probabilistic perspective." arXiv preprint arXiv:1711.00927 (2017).
+* [3] Yu, Changsong, et al. "Multi-level Attention Model for Weakly Supervised Audio Classification." arXiv preprint arXiv:1803.02353 (2018).
 
 ## External links
 The core model for audio classification is based on the [implementation](https://github.com/qiuqiangkong/audioset_classification) and paper by  Qiuqiang Kong. 
 
 The original [implementation](https://github.com/ChangsongYu/Eusipco2018_Google_AudioSet) of [3] is created by Changsong Yu. 
-
 
 # Learn more
 
@@ -228,4 +223,3 @@ The original [implementation](https://github.com/ChangsongYu/Eusipco2018_Google_
 # License
 
 [Apache 2.0](LICENSE)
-
