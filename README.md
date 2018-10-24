@@ -73,7 +73,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 ### Set up IBM CLI & ML CLI
 
 * Install [IBM Cloud CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started)
-  * Login using `ibmcloud login` or `ibmcloud login --sso` if within IBM
+  * Log in using `ibmcloud login` or `ibmcloud login --sso` if within IBM
 * Install [ML CLI Plugin](https://dataplatform.ibm.com/docs/content/analyze-data/ml_dlaas_environment.html)
   * After install, check if there is any plugins that need update
     * `ibmcloud plugin update`
