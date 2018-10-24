@@ -75,10 +75,9 @@ When the reader has completed this Code Pattern, they will understand how to:
 * Install [IBM Cloud CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started)
   * Log in using `ibmcloud login` or `ibmcloud login --sso` if within IBM
 * Install [ML CLI Plugin](https://dataplatform.ibm.com/docs/content/analyze-data/ml_dlaas_environment.html)
-  * After install, check if there is any plugins that need update
-    * `ibmcloud plugin update`
-  * Define the following environment variables, using the values you've collected earlier:
-    * `ML_INSTANCE`, `ML_USERNAME`, `ML_PASSWORD`, `ML_ENV`
+  * Verify that the latest plug-in version is installed
+    * `ibmcloud plugin update machine-learning`
+  * Define the following environment variables, using the values you've collected earlier: `ML_INSTANCE`,`ML_USERNAME`, `ML_PASSWORD`, `ML_ENV`
 
 # Steps
 
