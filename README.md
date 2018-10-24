@@ -3,11 +3,11 @@
 This developer code pattern will guide you through training a Deep Learning model to classify audio embeddings on IBM's Deep Learning as a Service (DLaaS) platform  - Watson Machine Learning - and performing inference/evaluation on IBM Watson Studio. 
 
 The model will use audio [_embeddings_](https://www.tensorflow.org/programmers_guide/embedding) as an input and generate output probabilities/scores for 527 classes. The classes cover a broad range of sounds like speech, genres of music, natural sounds like rain/lightning, automobiles etc. The full list of sound classes can be found at [Audioset Ontology](https://research.google.com/audioset/ontology/index.html). 
-The model is based on the paper ["Multi-level Attention Model for Weakly Supervised Audio Classification"](https://arxiv.org/abs/1803.02353). As outlined in the paper, the model accepts [_embeddings_](https://www.tensorflow.org/programmers_guide/embedding) of 10-second audio clips as opposed to the raw audio itself. The embedding vectors for raw audio can be generated using  VGG-ish [model](https://github.com/tensorflow/models/tree/master/research/audioset). The VGG-ish model converts each second of raw audio into an embedding(vector) of length 128 thus resulting in a tensor of shape 10x128 as the input for the classifier. For the purposes of illustrating the concept and exposing a developer to the features on IBM Cloud platforms, Google's Audioset data is used, where the embeddings have been pre-processed and available readily. Though Audioset data is used here, a developer can leverage this model to create their own custom audio classifier trained on their own audio data. They would however have to first generate the audio embeddings as mentioned above. 
+The model is based on the paper ["Multi-level Attention Model for Weakly Supervised Audio Classification"](https://arxiv.org/abs/1803.02353). As outlined in the paper, the model accepts [_embeddings_](https://www.tensorflow.org/programmers_guide/embedding) of 10-second audio clips as opposed to the raw audio itself. The embedding vectors for raw audio can be generated using  VGG-ish [model](https://github.com/tensorflow/models/tree/master/research/audioset). The VGG-ish model converts each second of raw audio into an embedding(vector) of length 128 thus resulting in a tensor of shape 10x128 as the input for the classifier. For the purposes of illustrating the concept and exposing a developer to the features of the IBM Cloud platform, Google's Audioset data is used, where the embeddings have been pre-processed and available readily. Though Audioset data is used here, a developer can leverage this model to create their own custom audio classifier trained on their own audio data. They would however have to first generate the audio embeddings as mentioned above. 
 
 When the reader has completed this Code Pattern, they will understand how to:
 
-* Setup an IBM Cloud object storage bucket and upload the training data to the cloud.
+* Setup an IBM Cloud Object Storage bucket and upload the training data to the cloud.
 * Upload a Deep Learning model to Watson ML for training.
 * Integrate the object storage buckets into IBM Watson Studio.
 * Perform inference on an evaluation dataset using Jupyter Notebooks over IBM Watson Studio.
@@ -16,9 +16,9 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 ## Flow
 
-1. Upload training files to Object Storage.
+1. Upload training files to Cloud Object Storage.
 2. Train on Watson Machine Learning.
-3. Transfer trained model weights to new bucket on IBM Cloud and link it to IBM Watson Studio.
+3. Transfer trained model weights to new bucket on IBM Cloud Object Storage and link it to IBM Watson Studio.
 4. Upload and run the attached Jupyter notebook on Watson Studio to perform inference. 
 
 ## Included Components
@@ -39,14 +39,16 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 # Prerequisites
 
-1. Setup cloud object storage and AWS command line tools.
-2. Create accounts on IBM Cloud and Watson Studio.
+1. Provision a Cloud Object Storage service instance on IBM Cloud.
+2. Provision a Watson Machine Learning service instance on IBM Cloud.
+3. Set up IBM Cloud and AWS command line tools.
 
-### Setup an IBM Cloud Object Storage (COS) account
+### Provision a Cloud Object Storage (COS) service instance
 
-* Create an IBM Cloud Object Storage account if you don't have one (https://www.ibm.com/cloud/storage)
+* Log in to the [IBM Cloud](https://console.bluemix.net/). Sign up for a free account if you don't have one yet.
+* [Provision a Cloud Object Storage service instance](https://console.bluemix.net/catalog/services/cloud-object-storage) on IBM Cloud if you don't have one 
 * Create credentials for either reading and writing or just reading
-	* From the bluemix console page (https://console.bluemix.net/dashboard/apps/), choose `Cloud Object Storage`
+	* From the IBM Cloud console page (https://console.bluemix.net/dashboard/apps/), choose `Cloud Object Storage`
 	* On the left side, click the `service credentials`
 	* Click on the `new credentials` button to create new credentials
 	* In the `Add New Credentials` popup, use this parameter `{"HMAC":true}` in the `Add Inline Configuration...`
@@ -57,14 +59,25 @@ When the reader has completed this Code Pattern, they will understand how to:
 * In addition setup your [AWS S3 command line](https://aws.amazon.com/cli/) which can be used to create buckets and/or add files to COS.
    * Export `AWS_ACCESS_KEY_ID` with your COS `access_key_id` and `AWS_SECRET_ACCESS_KEY` with your COS `secret_access_key`
 
-### Setup IBM CLI & ML CLI
+### Provision a Watson Machine Learning service instance
+
+* Log in to the [IBM Cloud](https://console.bluemix.net/). Sign up for a free account if you don't have one yet.
+* [Provision a Watson Machine Learning service instance](https://console.bluemix.net/catalog/services/machine-learning) on IBM Cloud if you don't have one 
+* Create new credentials 
+	* On the left side, click the `service credentials`
+	* Click on the `new credentials` button to create new credentials
+	* In the `Add New Credentials` popup accept the defaults and create the credentials.
+	* View the generated credentials and take note of the values for `instance`, `username`, `password`, and `url`. You will need this information when you configure your IBM Cloud CLI.	
+
+
+### Set up IBM CLI & ML CLI
 
 * Install [IBM Cloud CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started)
-  * Login using `bx login` or `bx login --sso` if within IBM
+  * Login using `ibmcloud login` or `ibmcloud login --sso` if within IBM
 * Install [ML CLI Plugin](https://dataplatform.ibm.com/docs/content/analyze-data/ml_dlaas_environment.html)
   * After install, check if there is any plugins that need update
-    * `bx plugin update`
-  * Make sure to setup the various environment variables correctly:
+    * `ibmcloud plugin update`
+  * Define the following environment variables, using the values you've collected earlier:
     * `ML_INSTANCE`, `ML_USERNAME`, `ML_PASSWORD`, `ML_ENV`
 
 # Steps
@@ -72,7 +85,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 The steps can be broadly classified into the following topics:
 
 1. Clone the repository.
-2. Upload training data to cloud object storage.
+2. Upload training data to Cloud Object Storage.
 3. Setup and upload model on Watson ML (DLaaS) to train.
 4. Upload evaluation notebook to Watson Studio.
 5. Run evaluation on Watson Studio.
@@ -92,14 +105,14 @@ A few things to mention about the contents of the repository:
 
 * [audio_classify.zip](audioset_classify.zip): This is the core training code we will be running on IBM Cloud. 
 * [audioset_classify](audioset_classify/): The training code for reference. We will use the first .zip file to upload this code to the cloud.
-* [training-runs.yml](training-runs.yml) This file is required to perform the training on IBM cloud. It is used to setup training metdata and connection information.
+* [training-runs.yml](training-runs.yml) This file is required to perform the training on IBM Cloud. It is used to setup training metadata and connection information.
 * [audioclassify_inference.ipynb](audioclassify_inference.ipynb) This is the notebook we will be using to perform inference after training. 
 
-## 2. Upload training data to the cloud
+## 2. Upload training data to cloud storage
 
 * Download the data from [here](https://github.com/qiuqiangkong/audioset_classification) under the section `download dataset`.
 
-* Create buckets on the object storage. This can be done either through the UI or through the command line as shown below. 
+* Create buckets on your Cloud Object Storage instance. This can be done either through the UI or through the command line as shown below. 
 
 We will create one bucket to put the training data and one bucket where the code will save the results/models at the end of training. 
 
@@ -108,14 +121,14 @@ $ aws s3 mb s3://training-audioset-classify
 $ aws s3 mb s3://results-audioset-classify
 ```
 
-Developers within IBM will need to add an endpoint URL to all `aws s3` comamnds. The above commands will thus look like this: 
+Developers within IBM will need to add an endpoint URL to all `aws s3` commands. The above commands will thus look like this: 
 
 ```
 $ aws --endpoint-url=http://s3-api.us-geo.objectstorage.softlayer.net s3 mb s3://training-audioset-classify
 $ aws --endpoint-url=http://s3-api.us-geo.objectstorage.softlayer.net s3mb s3://results-audioset-classify
 ```
 
-Now we can move the files to the object storage:
+Now we can move the files to the cloud storage:
 
 ```
 $ aws s3 cp bal_train.h5 s3://training-audioset-classify/
@@ -132,7 +145,7 @@ Now that we have our training data setup, we upload our model and submit a train
 * Run the below code on the terminal to start training:
 
 ```
-$ bx ml train audioset_classify.zip training-runs.yml
+$ ibmcloud ml train audioset_classify.zip training-runs.yml
 ```
 
 After the train is started, it should print the training-id that is going to be necessary for steps below
@@ -145,9 +158,9 @@ Model-ID is 'training-GCtN_YRig'
 
 ### Monitor the  training run
 
-* To list the training runs - `bx ml list training-runs`
-* To monitor a specific training run - `bx ml show training-runs <training-id>`
-* To monitor the output (stdout) from the training run - `bx ml monitor training-runs <training-id>`
+* To list the training runs - `ibmcloud ml list training-runs`
+* To monitor a specific training run - `ibmcloud ml show training-runs <training-id>`
+* To monitor the output (stdout) from the training run - `ibmcloud ml monitor training-runs <training-id>`
 	* This will print the first couple of lines, and may time out.
 
 Once the training is complete, you can access the model and weights from the cloud object storage. The weights can be downloaded from the UI. 
@@ -166,10 +179,11 @@ $ aws s3 cp s3://results-audioset-classify/<your_training_id>/models/main/balanc
 
 ## 4. Upload evaluation notebook on Watson Studio
 
-1. Create a new project `Audioset Classification` on Watson Studio.
-2. Navigate to `Assets -> Notebooks` and click on `New notebook`.
-3. On the next screen click on `From file` and upload the [audioclassify_inference.ipynb](audioclassify_inference.ipynb) file. 
-4. Upload `final_weights.h5` (file which we downloaded in the previous step) and `eval.h5` to the object storage linked to Watson Studio. This can be done by navigating to to `assets->New data asset` or clicking on the icon on the right to popup the data upload GUI as shown in the screenshot below. 
+1. [Log in to Watson Studio](https://www.ibm.com/cloud/watson-studio). Create a free account if you don't have one yet.
+2. Create a new project `Audioset Classification` on Watson Studio.
+3. Navigate to `Assets -> Notebooks` and click on `New notebook`.
+4. On the next screen click on `From file` and upload the [audioclassify_inference.ipynb](audioclassify_inference.ipynb) file. 
+5. Upload `final_weights.h5` (file which we downloaded in the previous step) and `eval.h5` to the object storage linked to Watson Studio. This can be done by navigating to to `assets->New data asset` or clicking on the icon on the right to popup the data upload GUI as shown in the screenshot below. 
 
 ![](doc/source/images/2.png)
 
