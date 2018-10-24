@@ -180,7 +180,7 @@ $ aws s3 cp s3://results-audioset-classify/<your_training_id>/models/main/balanc
 ## 4. Upload evaluation notebook on Watson Studio
 
 1. [Log in to Watson Studio](https://www.ibm.com/cloud/watson-studio). Create a free account if you don't have one yet.
-2. Create a new project `Audioset Classification` on Watson Studio.
+2. Create a new project `Audioset Classification` in Watson Studio.
 3. Navigate to `Assets -> Notebooks` and click on `New notebook`.
 4. On the next screen click on `From file` and upload the [audioclassify_inference.ipynb](audioclassify_inference.ipynb) file. 
 5. Upload `final_weights.h5` (file which we downloaded in the previous step) and `eval.h5` to the object storage linked to Watson Studio. This can be done by navigating to to `assets->New data asset` or clicking on the icon on the right to popup the data upload GUI as shown in the screenshot below. 
