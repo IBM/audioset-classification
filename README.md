@@ -106,7 +106,7 @@ A few things to mention about the contents of the repository:
 * [audioset_classify](audioset_classify/): The training code for reference. We will use the first .zip file to upload this code to the cloud.
 * [training-runs.yml](training-runs.yml) This file is required to perform the training on IBM Cloud. It is used to setup training metadata and connection information.
 * [audioclassify_inference.ipynb](audioclassify_inference.ipynb) This is the notebook we will be using to perform inference after training.
-* In addition to these files, you will need to download two more files: [eval_segments.csv](https://research.google.com/audioset/download.html) from the the [Audioset dataset page](https://research.google.com/audioset/download.html) and [class_label_indices.csv](https://github.com/IBM/MAX-Audio-Classifier/blob/master/samples/class_labels_indices.csv) from the MAX Audio Classifier [GitHub repo](https://github.com/IBM/MAX-Audio-Classifier/blob/master/samples/class_labels_indices.csv). We use this to visualize some results in the inference notebook.
+* In addition to these files, you will need to download two more files: [eval_segments.csv from the the Audioset dataset page](https://research.google.com/audioset/download.html) and [class_label_indices.csv](https://github.com/IBM/MAX-Audio-Classifier/blob/master/samples/class_labels_indices.csv) from the MAX Audio Classifier [GitHub repo](https://github.com/IBM/MAX-Audio-Classifier/blob/master/samples/class_labels_indices.csv). We use these metadata files to visualize some results in the inference notebook.
 
 ## 2. Upload training data to cloud storage
 
