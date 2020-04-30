@@ -1,6 +1,6 @@
 # Train and evaluate an audio embedding classifier
 
-This developer code pattern will guide you through training a Deep Learning model to classify audio embeddings on IBM's Deep Learning as a Service (DLaaS) platform  - Watson Machine Learning - and performing inference/evaluation on IBM Watson Studio. 
+This developer code pattern will guide you through training a Deep Learning model to classify audio embeddings on IBM Cloud Watson Machine Learning - and performing inference/evaluation on IBM Watson Studio. 
 
 The model will use audio [_embeddings_](https://www.tensorflow.org/programmers_guide/embedding) as an input and generate output probabilities/scores for 527 classes. The classes cover a broad range of sounds like speech, genres of music, natural sounds like rain/lightning, automobiles etc. The full list of sound classes can be found at [Audioset Ontology](https://research.google.com/audioset/ontology/index.html). 
 The model is based on the paper ["Multi-level Attention Model for Weakly Supervised Audio Classification"](https://arxiv.org/abs/1803.02353). As outlined in the paper, the model accepts [_embeddings_](https://www.tensorflow.org/programmers_guide/embedding) of 10-second audio clips as opposed to the raw audio itself. The embedding vectors for raw audio can be generated using  VGG-ish [model](https://github.com/tensorflow/models/tree/master/research/audioset). The VGG-ish model converts each second of raw audio into an embedding(vector) of length 128 thus resulting in a tensor of shape 10x128 as the input for the classifier. For the purposes of illustrating the concept and exposing a developer to the features of the IBM Cloud platform, Google's Audioset data is used, where the embeddings have been pre-processed and available readily. Though Audioset data is used here, a developer can leverage this model to create their own custom audio classifier trained on their own audio data. They would however have to first generate the audio embeddings as mentioned above. 
@@ -105,7 +105,8 @@ A few things to mention about the contents of the repository:
 * [audio_classify.zip](audioset_classify.zip): This is the core training code we will be running on IBM Cloud. 
 * [audioset_classify](audioset_classify/): The training code for reference. We will use the first .zip file to upload this code to the cloud.
 * [training-runs.yml](training-runs.yml) This file is required to perform the training on IBM Cloud. It is used to setup training metadata and connection information.
-* [audioclassify_inference.ipynb](audioclassify_inference.ipynb) This is the notebook we will be using to perform inference after training. 
+* [audioclassify_inference.ipynb](audioclassify_inference.ipynb) This is the notebook we will be using to perform inference after training.
+* In addition to these files, you will need to download two more files: [eval_segments.csv from the the Audioset dataset page](https://research.google.com/audioset/download.html) and [class_label_indices.csv](https://github.com/IBM/MAX-Audio-Classifier/blob/master/samples/class_labels_indices.csv) from the MAX Audio Classifier [GitHub repo](https://github.com/IBM/MAX-Audio-Classifier/blob/master/samples/class_labels_indices.csv). We use these metadata files to visualize some results in the inference notebook.
 
 ## 2. Upload training data to cloud storage
 
@@ -182,11 +183,12 @@ $ aws s3 cp s3://results-audioset-classify/<your_training_id>/models/main/balanc
 2. Create a new project `Audioset Classification` in Watson Studio.
 3. Navigate to `Assets -> Notebooks` and click on `New notebook`.
 4. On the next screen click on `From file` and upload the [audioclassify_inference.ipynb](audioclassify_inference.ipynb) file. 
-5. Upload `final_weights.h5` (file which we downloaded in the previous step) and `eval.h5` to the object storage linked to Watson Studio. This can be done by navigating to to `assets->New data asset` or clicking on the icon on the right to popup the data upload GUI as shown in the screenshot below. 
+5. Upload `final_weights.h5` (file which we downloaded in the previous step) and `eval.h5` to the object storage linked to Watson Studio. This can be done by navigating to `assets->New data asset` or clicking on the icon on the right to popup the data upload GUI as shown in the screenshot below.
+If you have not trained the model and want to use our pre-trained weights, please download them from [here](https://max-cdn.cdn.appdomain.cloud/max-audio-classifier/1.0.0/assets.tar.gz), extract the archive and upload the `classifier_weights.h5` file to Watson Studio. In the notebook we mention `final_weights.h5` and `classifier_weights.h5` interchangibly.
 
 ![](doc/source/images/2.png)
 
-5. Similarly, upload [audioset_classify/metadata/eval_segments.csv](audioset_classify/metadata/eval_segments.csv) and [audioset_classify/metadata/class_label_indices.csv](audioset_classify/metadata/class_label_indices.csv) files. These files contain metadata such as YouTube URLs, class labels and start/end times. 
+6. In addition, upload the `eval_segments.csv` and `class_label_indices.csv` files mentioned earlier. These files contain metadata such as YouTube URLs, class labels and start/end times. 
 
 ## Run inference
 
