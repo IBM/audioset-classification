@@ -183,7 +183,7 @@ $ aws s3 cp s3://results-audioset-classify/<your_training_id>/models/main/balanc
 2. Create a new project `Audioset Classification` in Watson Studio.
 3. Navigate to `Assets -> Notebooks` and click on `New notebook`.
 4. On the next screen click on `From file` and upload the [audioclassify_inference.ipynb](audioclassify_inference.ipynb) file. 
-5. Upload `final_weights.h5` (file which we downloaded in the previous step) and `eval.h5` to the object storage linked to Watson Studio. This can be done by navigating to to `assets->New data asset` or clicking on the icon on the right to popup the data upload GUI as shown in the screenshot below.
+5. Upload `final_weights.h5` (file which we downloaded in the previous step) and `eval.h5` to the object storage linked to Watson Studio. This can be done by navigating to `assets->New data asset` or clicking on the icon on the right to popup the data upload GUI as shown in the screenshot below.
 If you have not trained the model and want to use our pre-trained weights, please download them from [here](https://max-cdn.cdn.appdomain.cloud/max-audio-classifier/1.0.0/assets.tar.gz), extract the archive and upload the `classifier_weights.h5` file to Watson Studio. In the notebook we mention `final_weights.h5` and `classifier_weights.h5` interchangibly.
 
 ![](doc/source/images/2.png)
