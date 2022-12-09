@@ -1,3 +1,7 @@
+# WARNING: This repository is no longer maintained
+
+> This repository will not be updated. The repository will be kept available in read-only mode.
+
 # Train and evaluate an audio embedding classifier
 
 This developer code pattern will guide you through training a Deep Learning model to classify audio embeddings on IBM's Deep Learning as a Service (DLaaS) platform  - Watson Machine Learning - and performing inference/evaluation on IBM Watson Studio. 
